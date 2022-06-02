@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.yh.kakaotranslator.MainViewModel" />
     </data>
 
     <LinearLayout
@@ -27,13 +30,21 @@
             <EditText
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:hint="텍스트 입력" />
+                android:hint="텍스트 입력"
+                android:text="@={viewModel.inputTextLiveData}" />
 
             <EditText
+                android:id="@+id/result"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:hint="번역" />
         </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.translate()}"
+            android:text="translate" />
 
     </LinearLayout>
 </layout>

@@ -1,5 +1,7 @@
 package com.yh.kakaotranslator
 
+import android.util.Log
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,18 +16,25 @@ class MainViewModel @Inject constructor(private val repository: KakaoRepository)
     val mainViewStateLiveData: LiveData<MainViewState>
         get() = _mainViewStateLiveData
 
-    fun getSentenceTranslation(query: String, srcLang: String, targetLang: String) {
-        repository.getText(
-            query,
-            srcLang,
-            targetLang,
-            onSuccess = {
-                _mainViewStateLiveData.value = MainViewState.GetText(it.translatedText)
-            },
-            onFailure = {
+    val inputTextLiveData = MutableLiveData<String>()
+    val langObservableField = ObservableField<String>()
 
-            }
-        )
+    fun translate() {
+        if (!inputTextLiveData.value.isNullOrEmpty()) {
+            repository.getText(
+                query = inputTextLiveData.value!!,
+                srcLang = "kr",
+                targetLang = langObservableField.get()!!,
+                onSuccess = {
+
+                    Log.d("결과", "translate onSuccess")
+                    _mainViewStateLiveData.value = MainViewState.GetText(it.translated_text)
+                },
+                onFailure = {
+
+                }
+            )
+        }
     }
 
 }

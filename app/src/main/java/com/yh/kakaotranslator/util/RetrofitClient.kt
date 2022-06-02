@@ -1,8 +1,7 @@
-package com.yh.kakaomap.util
+package com.yh.kakaotranslator.util
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 object RetrofitClient {
 
