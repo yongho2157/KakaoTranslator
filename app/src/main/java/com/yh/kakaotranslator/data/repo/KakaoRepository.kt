@@ -1,13 +1,12 @@
 package com.yh.kakaotranslator.data.repo
 
 import com.yh.kakaotranslator.data.api.KakaoTranslatorDto
+import com.yh.kakaotranslator.util.Result
 
 interface KakaoRepository {
-    fun getText(
+    suspend fun getText(
         query: String,
         srcLang: String,
-        targetLang: String,
-        onSuccess: (KakaoTranslatorDto) -> Unit,
-        onFailure: (String) -> Unit
-    )
+        targetLang: String
+    ): Result<KakaoTranslatorDto>
 }

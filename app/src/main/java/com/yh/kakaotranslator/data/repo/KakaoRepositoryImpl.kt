@@ -2,18 +2,17 @@ package com.yh.kakaotranslator.data.repo
 
 import com.yh.kakaotranslator.data.api.KakaoTranslatorDto
 import com.yh.kakaotranslator.data.source.KakaoRemoteDataSource
+import com.yh.kakaotranslator.util.Result
 import javax.inject.Inject
 
-class KakaoRepositoryImpl @Inject constructor(private val kakaoRemoteDataSource: KakaoRemoteDataSource): KakaoRepository {
-    override fun getText(
+class KakaoRepositoryImpl @Inject constructor(private val kakaoRemoteDataSource: KakaoRemoteDataSource) :
+    KakaoRepository {
+
+    override suspend fun getText(
         query: String,
         srcLang: String,
-        targetLang: String,
-        onSuccess: (KakaoTranslatorDto) -> Unit,
-        onFailure: (String) -> Unit,
-    ) {
-        kakaoRemoteDataSource.getText(query, srcLang, targetLang, onSuccess, onFailure)
-    }
-
+        targetLang: String
+    ): Result<KakaoTranslatorDto> =
+        kakaoRemoteDataSource.getText(query, srcLang, targetLang)
 
 }
