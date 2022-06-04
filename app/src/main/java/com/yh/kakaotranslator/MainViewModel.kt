@@ -1,8 +1,5 @@
 package com.yh.kakaotranslator
 
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.yh.kakaotranslator.data.repo.KakaoRepository
 import com.yh.kakaotranslator.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,7 +38,10 @@ class MainViewModel @Inject constructor(private val repository: KakaoRepository)
                         }
                     }
                     is Result.Error -> {
-                        Result.Error(Exception("에러가 발생."))
+                        viewModelScope.launch {
+                            _mainViewStateLiveData.value =
+                                MainViewState.Error("에러가 발생.")
+                        }
                     }
                 }
             }

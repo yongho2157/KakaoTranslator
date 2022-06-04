@@ -22,17 +22,43 @@ class KakaoRepositoryImplTest {
 
     @Test
     fun getTextSuccessTest() {
-        Mockito.`when`(kakaoRemoteDataSource.getText(query = "안드로이드", srcLang = "kr", targetLang = "en")).thenReturn(Result.Success(mockTranslatorDto))
+        Mockito.`when`(
+            kakaoRemoteDataSource.getText(
+                query = "안드로이드",
+                srcLang = "kr",
+                targetLang = "en"
+            )
+        ).thenReturn(Result.Success(mockTranslatorDto))
+
+        Assert.assertEquals(
+            ((repository.getText(
+                query = "안드로이드",
+                srcLang = "kr",
+                targetLang = "en"
+            )) as Result.Success).data.translated_text,
+            (kakaoRemoteDataSource.getText(query = "안드로이드", srcLang = "kr", targetLang = "en") as Result.Success).data.translated_text
+        )
+
     }
 
     @Test
     fun getTextFailureTest() {
         val failResult = Result.Error(Exception("에러가 발생."))
-        Mockito.`when`(kakaoRemoteDataSource.getText(query = "안드로이드", srcLang = "kr", targetLang = "en")).then { failResult }
+        Mockito.`when`(
+            kakaoRemoteDataSource.getText(
+                query = "안드로이드",
+                srcLang = "kr",
+                targetLang = "en"
+            )
+        ).then { failResult }
 
         Assert.assertEquals(
-            (repository.getText(query = "안드로이드", srcLang = "kr", targetLang = "en")) as Result.Error,
-        kakaoRemoteDataSource.getText(query = "안드로이드", srcLang = "kr", targetLang = "en")
+            (repository.getText(
+                query = "안드로이드",
+                srcLang = "kr",
+                targetLang = "en"
+            )) as Result.Error,
+            kakaoRemoteDataSource.getText(query = "안드로이드", srcLang = "kr", targetLang = "en")
         )
 
     }
