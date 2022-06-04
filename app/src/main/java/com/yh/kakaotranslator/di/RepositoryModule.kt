@@ -1,26 +1,27 @@
 package com.yh.kakaotranslator.di
 
-import com.yh.kakaotranslator.data.repo.KakaoRepository
-import com.yh.kakaotranslator.data.repo.KakaoRepositoryImpl
-import com.yh.kakaotranslator.data.source.KakaoRemoteDataSource
-import com.yh.kakaotranslator.data.source.KakaoRemoteDataSourceImpl
-import dagger.Binds
+import com.example.repo.kakao.KakaoRepository
+import com.example.repo.kakao.KakaoRepositoryImpl
+import com.example.source_remote.kakao.KakaoRemoteDataSource
+import com.example.source_remote.kakao.KakaoRemoteDataSourceImpl
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class RepositoryModule {
+object RepositoryModule {
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun bindKakaoRepository(kakaoRepositoryImpl: KakaoRepositoryImpl): KakaoRepository
+    fun bindKakaoRepository(): KakaoRepository =
+        KakaoRepositoryImpl.getInstance(bindKakaoRepoDatasource())
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun bindKakaoRemoteDataSource(kakaoRemoteDataSourceImpl: KakaoRemoteDataSourceImpl): KakaoRemoteDataSource
-
+    fun bindKakaoRepoDatasource(): KakaoRemoteDataSource =
+        KakaoRemoteDataSourceImpl.getInstance()
 
 }

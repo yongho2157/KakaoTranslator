@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.yh.kakaotranslator.base.BaseActivity
 import com.yh.kakaotranslator.databinding.ActivityMainBinding
+import com.yh.kakaotranslator.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

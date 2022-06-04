@@ -3,13 +3,12 @@ package com.yh.kakaotranslator.viewmodel
 import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.example.core.Result
+import com.example.repo.kakao.KakaoRepository
+import com.example.response.remote.mock.mockTranslatorDto
 import com.nhaarman.mockitokotlin2.mock
-import com.yh.kakaotranslator.MainViewModel
 import com.yh.kakaotranslator.MainViewState
 import com.yh.kakaotranslator.base.ViewState
-import com.yh.kakaotranslator.data.repo.KakaoRepository
-import com.yh.kakaotranslator.data.source.KakaoRemoteDataSourceImplTest.Companion.mockTranslatorDto
-import com.yh.kakaotranslator.util.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

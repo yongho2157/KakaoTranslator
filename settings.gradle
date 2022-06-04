@@ -14,3 +14,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "KakaoTranslator"
 include ':app'
+include ':repo'
+include ':local'
+include ':source_remote'
+include ':core'
+include ':response'

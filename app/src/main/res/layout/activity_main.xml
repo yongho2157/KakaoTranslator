@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.yh.kakaotranslator.MainViewModel" />
+            type="com.yh.kakaotranslator.viewmodel.MainViewModel" />
     </data>
 
     <LinearLayout
