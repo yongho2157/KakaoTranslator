@@ -1,11 +1,12 @@
 package com.yh.kakaotranslator
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.viewModels
+import com.yh.kakaotranslator.base.BaseActivity
 import com.yh.kakaotranslator.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,14 +28,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun initViewModel() {
         binding.viewModel = mainViewModel
 
-        mainViewModel.mainViewStateLiveData.observe(this) { viewState ->
+        mainViewModel.viewStateLiveData.observe(this) { viewState ->
+            (viewState as? MainViewState)?.let { onChangedMainViewState(it) }
+        }
+    }
 
-            when (viewState) {
 
-                is MainViewState.GetText -> {
-                    binding.result.text.clear()
-                    binding.result.setText(viewState.text[0][0])
-                }
+    private fun onChangedMainViewState(viewState: MainViewState) {
+        when (viewState) {
+            is MainViewState.GetText -> {
+                binding.result.text.clear()
+                Toast.makeText(this, viewState.text[0][0], Toast.LENGTH_SHORT).show()
+                binding.result.setText(viewState.text[0][0])
+            }
+
+            is MainViewState.Error -> {
+
             }
         }
     }

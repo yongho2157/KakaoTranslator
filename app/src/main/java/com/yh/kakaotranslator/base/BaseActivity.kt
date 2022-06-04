@@ -1,4 +1,4 @@
-package com.yh.kakaotranslator
+package com.yh.kakaotranslator.base
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes
@@ -15,6 +15,5 @@ abstract class BaseActivity<B: ViewDataBinding>(@LayoutRes private val layoutId:
         binding = DataBindingUtil.setContentView(this, layoutId)
         setContentView(binding.root)
     }
-
 
 }

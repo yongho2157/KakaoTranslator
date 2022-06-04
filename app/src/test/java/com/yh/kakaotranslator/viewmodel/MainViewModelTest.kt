@@ -1,10 +1,12 @@
 package com.yh.kakaotranslator.viewmodel
 
+import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.yh.kakaotranslator.MainViewModel
 import com.yh.kakaotranslator.MainViewState
+import com.yh.kakaotranslator.base.ViewState
 import com.yh.kakaotranslator.data.repo.KakaoRepository
 import com.yh.kakaotranslator.data.source.KakaoRemoteDataSourceImplTest.Companion.mockTranslatorDto
 import com.yh.kakaotranslator.util.Result
@@ -28,15 +30,16 @@ class MainViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     private val mockKakaoRepository: KakaoRepository = mock()
-    private val mockObserver: Observer<MainViewState> = mock()
+    private val mockObserver: Observer<ViewState> = mock()
+    private val application: Application = mock()
 
     private lateinit var mainViewModel: MainViewModel
 
     @Before
     fun setUp() {
         Dispatchers.setMain(TestCoroutineDispatcher())
-        mainViewModel = MainViewModel(mockKakaoRepository)
-        mainViewModel.mainViewStateLiveData.observeForever(mockObserver)
+        mainViewModel = MainViewModel(application, mockKakaoRepository)
+        mainViewModel.viewStateLiveData.observeForever(mockObserver)
 
         mainViewModel.langObservableField.set("en")
         mainViewModel.inputTextLiveData.value = "android"
