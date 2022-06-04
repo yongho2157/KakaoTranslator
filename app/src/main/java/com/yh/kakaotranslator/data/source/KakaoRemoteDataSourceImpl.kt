@@ -10,7 +10,7 @@ class KakaoRemoteDataSourceImpl @Inject constructor() : KakaoRemoteDataSource {
 
     private val kakaoServie = RetrofitClient.create<KakaoService>(KakaoService.BASE_URL)
 
-    override suspend fun getText(
+    override fun getText(
         query: String,
         srcLang: String,
         targetLang: String
@@ -21,7 +21,7 @@ class KakaoRemoteDataSourceImpl @Inject constructor() : KakaoRemoteDataSource {
                     .execute().body()
             Result.Success(result!!)
         } catch (e: Exception) {
-            Result.Error(e)
+            Result.Error(Exception("에러가 발생."))
         }
     }
 }

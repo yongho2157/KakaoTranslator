@@ -39,7 +39,7 @@ class MainViewModel @Inject constructor(private val repository: KakaoRepository)
                         }
                     }
                     is Result.Error -> {
-
+                        Result.Error(Exception("에러가 발생."))
                     }
                 }
             }

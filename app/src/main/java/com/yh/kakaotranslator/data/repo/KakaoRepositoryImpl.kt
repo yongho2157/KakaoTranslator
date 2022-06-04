@@ -8,7 +8,7 @@ import javax.inject.Inject
 class KakaoRepositoryImpl @Inject constructor(private val kakaoRemoteDataSource: KakaoRemoteDataSource) :
     KakaoRepository {
 
-    override suspend fun getText(
+    override fun getText(
         query: String,
         srcLang: String,
         targetLang: String

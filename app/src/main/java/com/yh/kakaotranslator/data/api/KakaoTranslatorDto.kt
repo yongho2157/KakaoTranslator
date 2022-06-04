@@ -6,7 +6,3 @@ data class KakaoTranslatorDto(
     @SerializedName("translated_text")
     val translated_text: List<List<String>>
 )
-
-data class TranslatedText (
-    val text: String
-)
