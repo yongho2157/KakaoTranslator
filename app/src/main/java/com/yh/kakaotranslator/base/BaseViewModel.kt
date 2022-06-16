@@ -22,8 +22,6 @@ abstract class BaseViewModel(app: Application) : AndroidViewModel(app) {
 
 interface ViewState
 
-
-
 class SingleLiveEvent<T> : MutableLiveData<T>() {
     private val pending = AtomicBoolean(false)
 
